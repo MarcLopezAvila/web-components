@@ -9,8 +9,8 @@ class Application extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.root = createRoot(this.shadowRoot as ShadowRoot);
     this.shadow = this.shadowRoot as ShadowRoot
+    this.root = createRoot(this.shadow);
   }
 
   static get observedAttributes() {
@@ -19,7 +19,7 @@ class Application extends HTMLElement {
 
   render() {
     const config = getNodeAttributes(this);
-    render(this.root, this.shadow, config);
+    render(this.root, config);
   }
 
   connectedCallback() {
