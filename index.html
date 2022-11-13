@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React + TS</title>
+
+    <style>
+      section {
+        border: 1px solid;
+        padding: 10px;
+        margin-bottom: 10px
+      }
+    </style>
+  </head>
+  <body>
+    <script type="module" src="/src/index.ts"></script>
+
+    <section>
+      <h3>Simple</h3>
+      <my-button />
+    </section>
+
+    <section>
+      <h3>Attribute props</h3>
+      <my-button initial="10" />
+    </section>
+
+    <section>
+      <h3>Attribute update</h3>
+      <my-button class="my-button-props" initial="10" title="Count is 0" />
+      <script>
+        document.querySelector('.my-button-props').addEventListener('add-count', (e) => {
+          document.querySelector('.my-button-props').setAttribute('title', `Count is ${e.detail}`);
+        });
+      </script>
+    </section>
+
+    <section>
+      <h3>Parts style</h3>
+      <style>
+        .counter-2::part(title) {
+          color: red
+        }
+      </style>
+      <my-button class="counter-2" />
+    </section>
+
+    <section>
+      <h3>Slots</h3>
+      <my-button>
+        <p slot="title-slot">Slot title</p>
+      </my-button>
+    </section>
+
+    <section>
+      <h3>Templates</h3>
+      <template id="template-greet">
+        <p>Hi, this is a template</p>
+      </template>
+      <div class="template-container"></div>
+      <script type="text/javascript">
+        const template = document.querySelector('#template-greet')
+        const element = document.querySelector('.template-container')
+        element.appendChild(template.content);
+      </script>
+    </section>
+
+    <section>
+      <h3>Composed Custom events</h3>
+      <span class="current-count">Click the button!</span>
+      <my-button class="my-button-events" />
+      <script>
+        document.querySelector('.my-button-events').addEventListener('add-count', (e) => {
+          document.querySelector('.current-count').innerHTML = e.detail;
+        });
+      </script>
+    </section>
+  </body>
+</html>
